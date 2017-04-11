@@ -1,11 +1,55 @@
 import { combineReducers } from 'redux'
+import {ADD_CAMPUS, ADD_STUDENT, RECEIVE_CAMPUSES, RECEIVE_STUDENTS, RECEIVE_CAMPUS_STUDENTS, DELETE_STUDENT, SELECT_CAMPUS} from './action-creators'
 
-const initialState = {}
+const initialState = {
+  allCampuses: [],
+  allStudents: [],
+  allCampusStudents: [],
+  selectedStudent: {},
+  selectedCampus: {}
+}
 
 const rootReducer = function(state = initialState, action) {
-  switch(action.type) {
-    default: return state
+  const newState = Object.assign({}, state)
+  console.log('0.', newState.allStudents)
+  switch (action.type) {
+    case ADD_CAMPUS:
+      newState.allCampuses = [...newState.allCampuses, action.campus]
+      break;
+    case ADD_STUDENT:
+      newState.allStudents = [...newState.allStudents, action.student]
+      break;
+    case DELETE_STUDENT:
+      newState.allStudents.forEach((student, i) => {
+        if (student.id === action.student.id){
+          newState.allStudents.splice(i, 1)
+          console.log('1.', newState.allStudents)
+        }
+      })
+      break;
+    case RECEIVE_CAMPUSES:
+      newState.allCampuses = action.campuses
+      break;
+    case RECEIVE_STUDENTS:
+      newState.allStudents = action.students
+      break;
+    case RECEIVE_CAMPUS_STUDENTS:
+      newState.allCampusStudents = action.campusStudents
+      break;
+    case SELECT_CAMPUS:
+      newState.allCampuses.forEach(campus =>{
+        if (campus.name === action.campusName){
+          newState.selectedCampus = campus
+        }
+      })
+      break;
+    default:
+      return state
   }
+  console.log('2.', newState.allStudents)
+  return newState
 };
 
 export default rootReducer
+
+
