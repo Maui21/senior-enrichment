@@ -9,7 +9,6 @@ const SingleCampus = (props) => {
       <li key={student.id}><Link to={`/students/${student.id}`}> {student.name} </Link></li>
     )
   })
-  console.log('SC props', props)
   return (
     <div>
       <Navbar />

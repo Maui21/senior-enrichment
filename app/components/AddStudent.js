@@ -28,10 +28,7 @@ class AddStudent extends Component {
 
   onSelect(e){
     e.preventDefault()
-    console.dir(e.target)
-    console.log('target', e.target.value, e.target.key)
     this.setState({campusId: e.target.value})
-    console.log(this.state)
   }
 
   handleNameChange(e){

@@ -11,7 +11,6 @@ const initialState = {
 
 const rootReducer = function(state = initialState, action) {
   const newState = Object.assign({}, state)
-  console.log('0.', newState.allStudents)
   switch (action.type) {
     case ADD_CAMPUS:
       newState.allCampuses = [...newState.allCampuses, action.campus]
@@ -23,7 +22,6 @@ const rootReducer = function(state = initialState, action) {
       newState.allStudents.forEach((student, i) => {
         if (student.id === action.student.id){
           newState.allStudents.splice(i, 1)
-          console.log('1.', newState.allStudents)
         }
       })
       break;
@@ -46,7 +44,6 @@ const rootReducer = function(state = initialState, action) {
     default:
       return state
   }
-  console.log('2.', newState.allStudents)
   return newState
 };
 
